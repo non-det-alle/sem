@@ -327,6 +327,9 @@ class SimulationRunner(object):
             current_result['meta']['id'] = sim_uuid
             temp_dir = os.path.join(data_folder, current_result['meta']['id'])
             os.makedirs(temp_dir)
+            # Write cmd to file for debug purposes
+            with open(os.path.join(temp_dir, 'cmd'), 'w') as cmd_file:
+                cmd_file.write(sem.utils.get_command_from_result(self.script, current_result))
 
             start = time.time()  # Time execution
             stdout_file_path = os.path.join(temp_dir, 'stdout')
